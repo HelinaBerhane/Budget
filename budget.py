@@ -1,23 +1,27 @@
 # This Python file uses the following encoding: utf-8
-import time
+import time    # time
+import sqlite3 # databases
 
 ### Functions and Constants ###
 
+unixYear  = 31557600
+unixMonth = 2629800
+unixDay   = 86400
+
 # convert d/m/y to unix time
-
-UnixYear = 31557600
-
 def toUnix(date):
     return time.mktime(time.strptime(date, '%d/%m/%Y'))
         # time.strptime takes a string and turns it into a time object
             # https://docs.python.org/2/library/time.html#time.strftime
         # time.mktime turns the time object into unix time
-
-'''    
+ 
 # convert unix time to d/m/y
-def toDate(Udate):
-    # find a way to do this
-'''
+def toDate(uDate):
+    years  = round(uDate/unixYear,0)
+    months = round((uDate%unixYear)/unixMonth,0)
+    days   = round((uDate%unixMonth)/unixDay,0)
+    return str(int(years)) + "/" + str(int(months)) + "/" + str(int(days))
+    # find a better way to do this
         
 # convert a float to currenct in GBP
 def toPounds(money):
@@ -26,11 +30,9 @@ def toPounds(money):
 
 ### Income ###
 
-# test
-print("£")
-
-# create an array to hold the sources of income
+# initialise the master arrays
 masterIncome = []
+masterSpend  = []  # not used at the moment
 
 # ask if they have any income
 initialQuestion = raw_input("do you have any income (y/n)?")
@@ -41,10 +43,11 @@ if initialQuestion == "y":
     
     # ask how much
     incomeStr = raw_input("Input amount, start, info")
-    incArr = incomeStr.split(", ")
+    incArr    = incomeStr.split(", ")
     
     # log the amount, daily amount, start date, end date and info
-    fixedIncomeArr = [toPounds(float(incArr[0])), toPounds(float(incArr[0])/365.25), toUnix(incArr[1]), toUnix(incArr[1])+UnixYear, incArr[2]]
+    fixedIncomeArr = [float(incArr[0]), float(incArr[0])/365.25, toUnix(incArr[1]), toUnix(incArr[1])+unixYear, incArr[2]]
+    
     masterIncome.append(fixedIncomeArr)
     
     # ask if they have any more income until they say no
@@ -56,22 +59,25 @@ if initialQuestion == "y":
             
             # ask how much
             nIncomeStr = raw_input("Input amount, start, info")
-            nIncArr = nIncomeStr.split(", ")
+            nIncArr    = nIncomeStr.split(", ")
             
             # log the amount, daily amount, start date, end date and info
-            nFixedIncArr = [toPounds(float(nIncArr[0])), toPounds(float(nIncArr[0])/365.25), toUnix(nIncArr[1]), toUnix(nIncArr[1])+UnixYear, nIncArr[2]]
+            nFixedIncArr = [float(nIncArr[0]), float(nIncArr[0])/365.25, toUnix(nIncArr[1]), toUnix(nIncArr[1])+unixYear, nIncArr[2]]
             masterIncome.append(nFixedIncArr)
             # beware, python doesnt like printing £ signs in arrays
         
-        elif question == "n":
+        else:
             for i in masterIncome:
-                print("total:" + i[0] + ", " + "daily:" + i[1] + ", " + "start:" + str(i[2]) + ", " + "end:" + str(i[3]) + ", " + "info:" + i[4])
+                incomeSum = 0
+                print("total:" + toPounds(i[0]) + ", " + "daily:" + toPounds(i[1]) + ", " + "start:" + toDate(i[2]) + ", " + "end:" + toDate(i[3]) + ", " + "info:" + i[4])
+                incomeSum = incomeSum + i[1]
+            print("Sum: " + toPounds(incomeSum))
             break
+            
 
 ### Spendings ###
 
 '''
-masterSpend = []
 
 while True:
     question = raw_input("Do you want to add a spending (y/n)?")
