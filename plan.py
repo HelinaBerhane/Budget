@@ -1,25 +1,31 @@
-import time
-import sqlite3 #for logging
+﻿
+Modules you need to import:
+time	- to convert between unix time and d/m/y formats
+sqlite3 - to use a database to store data locally
+	  -- what was the difference between information and data again?
 
-# to use sqlite3, you need to make a Connection object that represents the database.
-# the data will be stored in budget.db
+Using sqlite3:
+- to use sqlite3, you need to make a Connection object that represents the database.
+  -- conn = sqlite3.connect('budget.db')
+  -- A SQLite database connection has the following attributes and methods (some not included):
+     --- isolation_level			gets or sets the current isolation level.
+     --- cursor([cursorClass])			The cursor method accepts a single optional parameter cursorClass.
+     --- commit()				This method commits the current transaction.
+						If you don’t call this method, anything you did since the last call to commit() is not visible from other database connections.
+						If you wonder why you don’t see the data you’ve written to the database, please check you didn’t forget to call this method.
+     --- rollback ()                            This method rolls back any changes to the database since the last call to commit().
+     --- close()                                This closes the database connection.
+						Note that this does not automatically call commit().
+						If you just close your database connection without calling commit() first, your changes will be lost!
+     --- execute(sql[, parameters])             This is a nonstandard shortcut that creates an intermediate cursor object by calling the cursor method, then calls the cursor’s execute method with the parameters given.
+     --- executemany(sql[, parameters])
+     --- executescript(sql_script)
+     --- create_function(name, num_params, func)
+- the data will be stored in budget.db
 
-'''conn = sqlite3.connect('budget.db')'''
+''''''
 
-    # A SQLite database connection has the following attributes and methods (some not included):
-        # isolation_level                           gets or sets the current isolation level.
-        # cursor([cursorClass])                     The cursor method accepts a single optional parameter cursorClass.
-        # commit()                                  This method commits the current transaction.
-                                                    # If you don’t call this method, anything you did since the last call to commit() is not visible from other database connections.
-                                                    # If you wonder why you don’t see the data you’ve written to the database, please check you didn’t forget to call this method.
-        # rollback ()                               This method rolls back any changes to the database since the last call to commit().
-        # close()                                   This closes the database connection.
-                                                    # Note that this does not automatically call commit().
-                                                    # If you just close your database connection without calling commit() first, your changes will be lost!
-        # execute(sql[, parameters])                This is a nonstandard shortcut that creates an intermediate cursor object by calling the cursor method, then calls the cursor’s execute method with the parameters given.
-        # executemany(sql[, parameters])
-        # executescript(sql_script)
-        # create_function(name, num_params, func)
+
 
 #first, assume you have an income of £x
 
