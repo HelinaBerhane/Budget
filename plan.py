@@ -1,4 +1,11 @@
-﻿
+﻿### To Do ###
+
+# []	replace time with datetime 				https://docs.python.org/2/library/datetime.html
+# []	fix toDate						http://stackoverflow.com/questions/3682748/converting-unix-timestamp-string-to-readable-date-in-python
+# []	find a way to do inputs in python3
+# []	replace raw_input with python3 compatible inputs
+# []	replace the prompt for input with databases
+
 Modules you need to import:
 time	- to convert between unix time and d/m/y formats
 sqlite3 - to use a database to store data locally
