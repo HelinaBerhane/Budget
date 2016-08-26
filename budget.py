@@ -21,7 +21,7 @@ def toDate(uDate):
     months = round((uDate%unixYear)/unixMonth,0)
     days   = round((uDate%unixMonth)/unixDay,0)
     return str(int(years)) + "/" + str(int(months)) + "/" + str(int(days))
-    # find a better way to do this
+    # broken
         
 # convert a float to currenct in GBP
 def toPounds(money):
@@ -93,3 +93,4 @@ while True:
         print(masterSpend)
         break
 '''
+
