@@ -7,41 +7,44 @@ import sqlite3 # databases
 ### Initialisation ###
 
 # create the connection object that represents the database
-connection = sqlite3.connect('budget.db')
+connextion = sqlite3.connect('budget.db')
 # create a Cursor object and call its execute() method to perform SQL commands:
 c = connection.cursor()
 
 ## In ##
 # Create the income table
-c.execute("CREATE TABLE IF NOT EXISTS incomeTable(date INT, amount FLOAT, notes STRING(1000))")
+c.execute("CREATE TABLE IF NOT EXISTS incomeTable(date INT, amount FLOAT, dailyAmount FLOAT, notes STRING(1000))")
 # Ask to add income
-askIncome = input("Do you want to add any incomes? y/n")
+askI = input("Do you want to add any incomes? y/n")
 # Add income
-if askIncome == "y":
-    incomeStr = input("Input date, amount, notes")
-    incArr    = incomeStr.split(", ")
-    c.execute("INSERT INTO income (date, amount, notes) VALUES ("+incArr[0]+", "+incArr[1]+", "+incArr[2]+")") 
+if askI == "y":
+    iStr    = input("Input date, amount, notes")
+    iArr    = iStr.split(", ")
+	iDate   = incArr[0]
+	iAmount = incArr[1]
+	iDaily  = str(float(iAmount)/365.25)
+	iNotes  = incArr[2]
+    c.execute("INSERT INTO income (date, amount, notes) VALUES ("+iDate+", "+iAmount[1]+", "+incArr[2]+")") 
     # this doesnt work atm
 # Print incomeTable
-incomeData = c.execute( "SELECT * FROM income" )
-for i in data:
+for row in c.execute("SELECT * FROM income"):
 	print( i )
 
 ## Out ##
 # Create the spendings table
-c.execute("CREATE TABLE IF NOT EXISTS spendingTable(date INT, amount FLOAT, notes STRING(1000))")
+#c.execute("CREATE TABLE IF NOT EXISTS spendingTable(date INT, amount FLOAT, notes STRING(1000))")
 # Ask to add spendings
-askSpendings = input("Do you want to add any spendings? y/n")
+#askSpendings = input("Do you want to add any spendings? y/n")
 # Add income
-if askSpendings == "y":
-    spendingsStr = input("Input date, amount, notes")
-    spendArr     = spendingsStr.split(", ")
-    c.execute("INSERT INTO spendings (date, amount, notes) VALUES ("+incArr[0]+", "+incArr[1]+", "+incArr[2]+")") 
+#if askSpendings == "y":
+#    spendingsStr = input("Input date, amount, notes")
+#    spendArr     = spendingsStr.split(", ")
+#    c.execute("INSERT INTO spendings (date, amount, notes) VALUES ("+incArr[0]+", "+incArr[1]+", "+incArr[2]+")") 
     # this doesnt work atm
 # Print incomeTable
-spendingsData = c.execute( "SELECT * FROM spendings" )
-for i in data:
-	print( i )
+#spendingsData = c.execute( "SELECT * FROM spendings" )
+#for i in data:
+#	print( i )
 	
 # Insert a row of data:         c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
 # Save (commit) the changes:    conn.commit()
