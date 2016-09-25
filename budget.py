@@ -14,24 +14,26 @@ c = connection.cursor()
 ## In ##
 # Create the income table
 c.execute("CREATE TABLE IF NOT EXISTS incomeTable(date INT, amount FLOAT, dailyAmount FLOAT, notes STRING(1000))")
-
-# Ask to add income
-askI = input("Do you want to add any incomes? y/n")
-# Add income
-if askI == "y":
-    iStr    = input("Input date, amount, notes")
-    iArr    = iStr.split(", ")
-    fIArr   = [iArr[0], iArr[1], str(float(iArr[1])/365), iArr[2]]
-	#iDate   = iArr[0]
-	#iAmount = iArr[1]
-	#iDaily  = str(float(iAmount)/365.25)
-	#iNotes  = incArr[2]
-    c.execute("INSERT INTO incomeTable VALUES (?,?,?,?)", fIArr)
-    # this doesnt work atm
-# Print incomeTable
-for row in c.execute("SELECT * FROM incomeTable"):
-	print( row )
-
+while True:
+    # Ask to add income
+    initialQuestionI = input("Do you want to add any incomes? y/n")
+    if initialQuestionI == "y":
+        # Add income
+        iStr    = input("Input date, amount, notes")
+        iArr    = iStr.split(", ")
+        fIArr   = [iArr[0], iArr[1], str(float(iArr[1])/365), iArr[2]]
+        c.execute("INSERT INTO incomeTable VALUES (?,?,?,?)", fIArr)
+    else:
+        # Print sources of income
+        print("Your sources of income are:")
+        for row in c.execute("SELECT * FROM incomeTable"):
+	        print(row)
+        # Print total daily income
+        c.execute("SELECT SUM(dailyAmount) FROM incomeTable")
+        dailySumI = c.fetchone()
+        print("Your total daily income is " + str(dailySumI[0]))
+        break
+        
 ## Out ##
 # Create the spendings table
 #c.execute("CREATE TABLE IF NOT EXISTS spendingTable(date INT, amount FLOAT, notes STRING(1000))")
