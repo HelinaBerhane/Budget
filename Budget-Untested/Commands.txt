@@ -1,1 +1,0 @@
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";C:\Users\Helina\AppData\Local\Programs\Python\Python35-32, "Machine")
