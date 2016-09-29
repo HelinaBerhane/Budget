@@ -15,9 +15,9 @@ c = connection.cursor()
 c.execute("CREATE TABLE IF NOT EXISTS incomeTable(date INT, amount FLOAT, dailyAmount FLOAT, notes STRING(1000))")
 c.execute("CREATE TABLE IF NOT EXISTS spendingTable(date INT, amount FLOAT, notes STRING(1000))")
 
-#---------------#
-#-- Functions --#
-#---------------#
+#---------------------#
+#----- Functions -----#
+#---------------------#
 
 def incomeFunction():
     # Ask them to input their income
@@ -83,16 +83,16 @@ def spendingFunction():
 
 # ask the user what they want to do
 print("what do you want to do?")
-print("    1 to add a source of income")
-print("    2 to add a spending")
-print("    3 to add an impulse buy")
-print("    4 to see graphs")
-print("        4.1 graphs about income")
-print("            4.1.1 total current daily income")
-print("            4.1.2 income over time")
-print("            4.1.3 current income from different sources")
-print("            4.1.4 total income from different sources")
-intQ = input("        4.2 graphs about spendings")
+print("1 to add a source of income")
+print("2 to add a spending")
+print("3 to add an impulse buy")
+print("4 to see graphs")
+print("    4.1 graphs about income")
+print("        4.1.1 total current daily income")
+print("        4.1.2 income over time")
+print("        4.1.3 current income from different sources")
+print("        4.1.4 total income from different sources")
+intQ = input("    4.2 graphs about spendings")
 
 while True:
     # if they want to add a source of income
@@ -113,23 +113,30 @@ while True:
     elif intentionQuestion == 4: 
 	# ask them what graphs they want to see
         print("what graphs do you want to see?")
-	print("    1 graphs about income")
-	print("        1.1 total current daily income")
-	print("        1.2 income over time")
-	print("        1.3 current income from different sources")
+	print("1 graphs about income")
+	print("    1.1 total current daily income")
+	print("    1.2 income over time")
+	print("    1.3 current income from different sources")
 	intQ4 = input("        1.4 total income from different sources")
    	    # if they want to see graphs about income
             if intQ4 == 1:
                 # ask them what graphs they want to see
+                print("what graphs do you want to see?")
+	        print("1 total current daily income")
+	        print("2 income over time")
+	        print("3 current income from different sources")
+	        intQ4 = input("4 total income from different sources")
                 # if they want to see graphs about 
-                if intQ4 == 
-
+                if intQ4 == 1:
+                    break
                 # if they want to see graphs about 
-                if intQ4 == 
-
+                if intQ4 == 2:
+                    break
                 # if they want to see graphs about 
-                if intQ4 == 
-        break
+                if intQ4 == 3:
+                    break
+            else:
+                break
     else:
 	break
 
