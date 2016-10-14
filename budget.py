@@ -41,7 +41,7 @@ def incomeFunction():
             # Print sources of income
             print("Your sources of income are:")
             for row in c.execute("SELECT * FROM incomeTable"):
-	        print(row)
+	            print(row)
             # Print total daily income
             c.execute("SELECT SUM(dailyAmount) FROM incomeTable")
             dailySumI = c.fetchone()
@@ -70,7 +70,7 @@ def spendingFunction():
             # Print sources of income
             print("Your sources of spending are:")
             for row in c.execute("SELECT * FROM spendingTable"):
-	        print(row)
+	            print(row)
             # Print total daily income
             c.execute("SELECT SUM(dailyAmount) FROM spendingTable")
             dailySumS = c.fetchone()
@@ -92,53 +92,54 @@ print("        4.1.1 total current daily income")
 print("        4.1.2 income over time")
 print("        4.1.3 current income from different sources")
 print("        4.1.4 total income from different sources")
-intQ = input("    4.2 graphs about spendings")
-
+print("    4.2 graphs about spendings")
+intQ1 = input("- ")
 while True:
     # if they want to add a source of income
-    if intentionQuestion == 1:
+    if intQ1 == 1:
         incomeFunction()
         break
     
     # if they want to add a spending
-    elif intentionQuestion == 2:
+    elif intQ1 == 2:
         spendingFunction()
         break
     
     # if they want to add an impulse buy
-    elif intentionQuestion == 3:
+    elif intQ1 == 3:
         break
     
     # if they want to see graphs
-    elif intentionQuestion == 4: 
-	# ask them what graphs they want to see
+    elif intQ1 == 4: 
+    # ask them what graphs they want to see
         print("what graphs do you want to see?")
-	print("1 graphs about income")
-	print("    1.1 total current daily income")
-	print("    1.2 income over time")
-	print("    1.3 current income from different sources")
-	intQ4 = input("        1.4 total income from different sources")
-   	    # if they want to see graphs about income
+        print("1 graphs about income")
+        print("    1.1 total current daily income")
+        print("    1.2 income over time")
+        print("    1.3 current income from different sources")
+        print("        1.4 total income from different sources")
+        intQ4 = input("- ")
+   	        # if they want to see graphs about income
+        if intQ4 == 1:
+            # ask them what graphs they want to see
+            print("what graphs do you want to see?")
+            print("1 total current daily income")
+            print("2 income over time")
+            print("3 current income from different sources")
+            intQ4 = input("4 total income from different sources")
+                # if they want to see graphs about 
             if intQ4 == 1:
-                # ask them what graphs they want to see
-                print("what graphs do you want to see?")
-	        print("1 total current daily income")
-	        print("2 income over time")
-	        print("3 current income from different sources")
-	        intQ4 = input("4 total income from different sources")
-                # if they want to see graphs about 
-                if intQ4 == 1:
-                    break
-                # if they want to see graphs about 
-                if intQ4 == 2:
-                    break
+                break
+            # if they want to see graphs about 
+            if intQ4 == 2:
+                break
                 # if they want to see graphs about 
                 if intQ4 == 3:
                     break
-            else:
-                break
+        else:
+            break
     else:
-	break
+	    break
 
 #---------#
 #-- End --#
